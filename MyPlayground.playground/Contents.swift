@@ -6,17 +6,6 @@ func getCard(urlRequest: URL?) {
         if error != nil {
             print("Это ошибка\n\(error ?? fatalError())")
         } else if let response = response as? HTTPURLResponse, response.statusCode == 200 {
-//            guard let data = data else { return }
-//            let dataAsString = String(data: data, encoding: .utf8)
-//            print("""
-//                  Это код ответа
-//                  ---------------------------
-//                  \(response)
-//                  Это пришедшие данные
-//                  ---------------------------
-//                  \(dataAsString ?? "данные отсутствуют")
-//                  ---------------------------
-//                  """)
             guard let data = data else { return }
             do {
                 let dataAsDecodingString = try JSONDecoder().decode(Cards.self, from: data)
@@ -31,7 +20,7 @@ func getCard(urlRequest: URL?) {
                       Мановая стоимость: \(dataAsDecodingString.card.cmc ?? 0)
                       Название сета: \(dataAsDecodingString.card.setName ?? "Вне сета")
                       Цвета: \(dataAsDecodingString.card.colors ?? ["Без цвета"])
-                      Редкость: \(dataAsDecodingString.card.rarity ?? "Редкость неопределена")
+                      Редкость: \(dataAsDecodingString.card.rarity ?? "Редкость неопределена")/n
                       """)
             } catch {
                 print("error")
@@ -44,6 +33,6 @@ func getCard(urlRequest: URL?) {
 let optURL = CardURL("485382")
 getCard(urlRequest: optURL.getURL())
 
-//// Карта Black Lotus
-//let blackLotusURL = CardURL(with: "Black Lotus")
-//getCard(urlRequest: blackLotusURL.getURL())
+// Карта Black Lotus
+let blackLotusURL = CardURL("382866")
+getCard(urlRequest: blackLotusURL.getURL())

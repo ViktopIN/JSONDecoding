@@ -10,5 +10,4 @@ public struct Card: Decodable {
     public var type: String?
     public var rarity: String?
     public var setName: String?
-    
 }
