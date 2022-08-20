@@ -1,6 +1,6 @@
 import Foundation
 public struct Cards: Decodable {
-    public var card: Card
+    public var cards: [Card]
 }
 
 public struct Card: Decodable {

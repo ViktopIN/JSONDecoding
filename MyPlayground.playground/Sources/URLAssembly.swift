@@ -4,8 +4,9 @@ public struct CardURL {
 
     private let scheme = "https"
     private let host = "api.magicthegathering.io"
-    private let path: String
-    
+    private let path = "/v1/cards/"
+    private var requestQuery: URLQueryItem
+
     public func getURL() -> URL? {
         var components = URLComponents()
         
@@ -13,10 +14,12 @@ public struct CardURL {
         components.host = self.host
         components.path = self.path
         
+        components.queryItems = [requestQuery]
+        
         return components.url
     }
     
-    public init(_ id: String) {
-        self.path = "/v1/cards/\(id)"
+    public init(_ name: String) {
+        self.requestQuery = URLQueryItem(name: "name", value: name)
     }
 }

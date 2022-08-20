@@ -15,14 +15,22 @@ func getCard(urlRequest: URL?) {
                       \(response)
                       Это пришедшие данные
                       ---------------------------
-                      Имя карты: \(dataAsDecodingString.card.name ?? "имя отсутствует")
-                      Тип: \(dataAsDecodingString.card.type ?? "без типа")
-                      Мановая стоимость: \(dataAsDecodingString.card.cmc ?? 0)
-                      Название сета: \(dataAsDecodingString.card.setName ?? "Вне сета")
-                      Цвета: \(dataAsDecodingString.card.colors ?? ["Без цвета"])
-                      Редкость: \(dataAsDecodingString.card.rarity ?? "Редкость неопределена")/n
                       """)
-            } catch {
+                dataAsDecodingString.cards.forEach { card in
+                print("""
+                      --------------------------------------------------
+                      Имя карты: \(card.name ?? "имя отсутствует")
+                      Тип: \(card.type ?? "без типа")
+                      Мановая стоимость: \(card.cmc ?? 0)
+                      Название сета: \(card.setName ?? "Вне сета")
+                      Цвета: \(card.colors?.joined(separator: ",") ?? "Без цвета")
+                      Редкость: \(card.rarity ?? "Редкость неопределена")
+                      --------------------------------------------------
+                      """)
+                }
+            }
+            catch
+            {
                 print("error")
             }
         }
@@ -30,9 +38,6 @@ func getCard(urlRequest: URL?) {
 }
 
 // Карта Opt
-let optURL = CardURL("485382")
+let optURL = CardURL("Opt")
 getCard(urlRequest: optURL.getURL())
 
-// Карта Black Lotus
-let blackLotusURL = CardURL("382866")
-getCard(urlRequest: blackLotusURL.getURL())
