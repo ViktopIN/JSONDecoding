@@ -7,12 +7,14 @@ func getCard(urlRequest: URL?) {
             print("Это ошибка\n\(error ?? fatalError())")
         } else if let response = response as? HTTPURLResponse, response.statusCode == 200 {
             guard let data = data else { return }
+            print("""
+                  Это код ответа
+                  ---------------------------
+                  \(response)
+                  """)
             do {
                 let dataAsDecodingString = try JSONDecoder().decode(Cards.self, from: data)
                 print("""
-                      Это код ответа
-                      ---------------------------
-                      \(response)
                       Это пришедшие данные
                       ---------------------------
                       """)
@@ -38,6 +40,6 @@ func getCard(urlRequest: URL?) {
 }
 
 // Карта Opt
-let optURL = CardURL("Opt")
+let optURL = CardURL("Opt|Black Lotus")
 getCard(urlRequest: optURL.getURL())
 
