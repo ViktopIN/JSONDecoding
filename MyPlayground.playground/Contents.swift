@@ -19,27 +19,29 @@ func getCard(urlRequest: URL?) {
                       ---------------------------
                       """)
                 dataAsDecodingString.cards.forEach { card in
-                print("""
-                      --------------------------------------------------
-                      Имя карты: \(card.name ?? "имя отсутствует")
-                      Тип: \(card.type ?? "без типа")
-                      Мановая стоимость: \(card.cmc ?? 0)
-                      Название сета: \(card.setName ?? "Вне сета")
-                      Цвета: \(card.colors?.joined(separator: ",") ?? "Без цвета")
-                      Редкость: \(card.rarity ?? "Редкость неопределена")
-                      --------------------------------------------------
-                      """)
+                    if card.name == "Black Lotus" || card.name == "Opt" {
+                        print("""
+                              --------------------------------------------------
+                              Имя карты: \(card.name ?? "имя отсутствует")
+                              Тип: \(card.type ?? "без типа")
+                              Мановая стоимость: \(card.cmc ?? 0)
+                              Название сета: \(card.setName ?? "Вне сета")
+                              Цвета: \(card.colors?.joined(separator: ",") ?? "Без цвета")
+                              Редкость: \(card.rarity ?? "Редкость неопределена")
+                              --------------------------------------------------
+                              """)
+                    } else {
+                        print("Карты с таким названием отсутствуют")
+                    }
                 }
-            }
-            catch
-            {
+            } catch {
                 print("error")
             }
         }
     }.resume()
 }
 
-// Карта Opt
-let optURL = CardURL("Opt|Black Lotus")
-getCard(urlRequest: optURL.getURL())
+// Запрос
+let requestUrl = CardURL("Opt|Black Lotus")
+getCard(urlRequest: requestUrl.getURL())
 
